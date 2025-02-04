@@ -11,11 +11,13 @@ Background:
         | Big Mac    | 1/4 lb burger   | 5.99    | True      | FOOD       |
         | Sheets     | Full bed sheets | 87.00   | True      | HOUSEWARES |
 
+# scenario 1
 Scenario: The server is running
     When I visit the "Home Page"
     Then I should see "Product Catalog Administration" in the title
     And I should not see "404 Not Found"
 
+# scenario 2
 Scenario: Create a Product
     When I visit the "Home Page"
     And I set the "Name" to "Hammer"
@@ -39,6 +41,7 @@ Scenario: Create a Product
     And I should see "Tools" in the "Category" dropdown
     And I should see "34.95" in the "Price" field
 
+# scenario 3
 Scenario: Read a Product
     When I visit the "Home Page"
     And I set the "Name" to "Hat"
@@ -55,6 +58,7 @@ Scenario: Read a Product
     And I should see "Cloths" in the "Category" dropdown
     And I should see "59.95" in the "Price" field
 
+# scenario 4
 Scenario: Update a Product
     When I visit the "Home Page"
     And I set the "Name" to "Hat"
@@ -76,6 +80,7 @@ Scenario: Update a Product
     And I should see "Fedora" in the results
     And I should not see "Hat" in the results
 
+# scenario 5
 Scenario: Delete a Product
     When I visit the "Home Page"
     And I set the "Name" to "Shoes"
@@ -92,6 +97,7 @@ Scenario: Delete a Product
     Then I should see the message "Success"
     And I should not see "Shoes" in the results
 
+# scenario 6
 Scenario: List all products
     When I visit the "Home Page"
     And I press the "Clear" button
@@ -102,10 +108,11 @@ Scenario: List all products
     And I should see "Big Mac" in the results
     And I should see "Sheets" in the results
 
+# scenario 7
 Scenario: Search by category
     When I visit the "Home Page"
     And I press the "Clear" button
-    And I select "HOUSEWARES" in the "Category" dropdown
+    And I select "Housewares" in the "Category" dropdown
     And I press the "Search" button
     Then I should see the message "Success"
     And I should see "Sheets" in the results
@@ -113,6 +120,7 @@ Scenario: Search by category
     And I should not see "Shoes" in the results
     And I should not see "Big Mac" in the results
 
+# scenario 8
 Scenario: Search by available
     When I visit the "Home Page"
     And I press the "Clear" button
@@ -124,6 +132,7 @@ Scenario: Search by available
     And I should see "Sheets" in the results
     And I should not see "Shoes" in the results
 
+# scenario 98
 Scenario: Search by name
     When I visit the "Home Page"
     And I set the "Name" to "Big Mac"
