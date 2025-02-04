@@ -109,10 +109,18 @@ def step_impl(context, element_name):
 @when('I press the "{button}" button')
 def step_impl(context, button):
     button_id = button.lower() + '-btn'
+    
+    # Wait for the button to be clickable
     WebDriverWait(context.driver, context.wait_seconds).until(
         expected_conditions.element_to_be_clickable((By.ID, button_id))
     )
-    context.driver.find_element(By.ID, button_id).click()
+    
+    # Ensure the button is in a clickable state
+    button = context.driver.find_element(By.ID, button_id)
+    if button.is_enabled() and button.is_displayed():
+        button.click()
+    else:
+        raise Exception(f"Button {button_id} is not clickable or not interactable.")
 
 @then('I should see "{name}" in the results')
 def step_impl(context, name):

@@ -83,7 +83,7 @@ Scenario: Update a Product
 # scenario 5
 Scenario: Delete a Product
     When I visit the "Home Page"
-    And I set the "Name" to "Shoes"
+    And I set the "Name" to "Hat"
     And I press the "Search" button
     Then I should see the message "Success"
     And I should see "A red fedora" in the "Description" field
@@ -95,7 +95,7 @@ Scenario: Delete a Product
     When I press the "Clear" button
     And I press the "Search" button
     Then I should see the message "Success"
-    And I should not see "Shoes" in the results
+    And I should not see "Hat" in the results
 
 # scenario 6
 Scenario: List all products
