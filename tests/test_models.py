@@ -236,3 +236,24 @@ class TestProductModel(unittest.TestCase):
         self.assertEqual(found.count(), count)
         for product in found:
             self.assertEqual(product.price, price)
+
+    def test_deserialize_invalid_data(self):
+        """It should raise a DataValidationError when the product data is malformed or incomplete"""
+
+        # Create malformed data where price is valid (decimal) but 'available' is an invalid type
+        invalid_data = {
+            "name": "Test Product",
+            "description": "This is a test product",
+            "price": 12.50,  # Valid decimal type for price
+            "available": "maybe",  # Invalid type for available (should be boolean)
+            "category": "CLOTHS"
+        }
+        # Try to deserialize and catch the exception
+        with self.assertRaises(DataValidationError) as context:
+            product = Product()
+            product.deserialize(invalid_data)
+        # Check if the exception message matches the expected one
+        self.assertEqual(
+            str(context.exception),
+            "Invalid type for boolean [available]: <class 'str'>"
+        )
